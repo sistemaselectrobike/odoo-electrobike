@@ -1,1 +1,1 @@
-# odoo-electrobike 
+# odoo-electrobike
