@@ -5,32 +5,32 @@ from odoo import api, fields, models, tools
 
 class PosSaleReport_EB(models.Model):
     _name = "report.all.channels.sales.eb"
-    _description = "All sales orders grouped by sales channels"
+    _description = "Reporte general de ventas"
     _auto = False
 
-    name = fields.Char('Order Reference', readonly=True)
-    #puntodeventa = fields.Char('Punto de venta', readonly=True)
-    partner_id = fields.Many2one('res.partner', 'Partner', readonly=True)
-    product_id = fields.Many2one('product.product', string='Product', readonly=True)
-    product_tmpl_id = fields.Many2one('product.template', 'Product Template', readonly=True)
-    date_order = fields.Datetime(string='Date Order', readonly=True)
-    user_id = fields.Many2one('res.users', 'Salesperson', readonly=True)
-    categ_id = fields.Many2one('product.category', 'Product Category', readonly=True)
-    company_id = fields.Many2one('res.company', 'Company', readonly=True)
+    name = fields.Char('Orden de venta', readonly=True)
+    puntodeventa = fields.Char('Punto de venta', readonly=True)
+    partner_id = fields.Many2one('res.partner', 'Cliente', readonly=True)
+    product_id = fields.Many2one('product.product', string='Producto', readonly=True)
+    product_tmpl_id = fields.Many2one('product.template', 'Producto (Template)', readonly=True)
+    date_order = fields.Datetime(string='Fecha de la orden', readonly=True)
+    user_id = fields.Many2one('res.users', 'Vendedor', readonly=True)
+    categ_id = fields.Many2one('product.category', 'Categoría de producto', readonly=True)
+    company_id = fields.Many2one('res.company', 'Companía', readonly=True)
     price_total = fields.Float('Total', readonly=True)
-    pricelist_id = fields.Many2one('product.pricelist', 'Pricelist', readonly=True)
-    country_id = fields.Many2one('res.country', 'Partner Country', readonly=True)
-    price_subtotal = fields.Float(string='Price Subtotal', readonly=True)
-    product_qty = fields.Float('Product Quantity', readonly=True)
-    analytic_account_id = fields.Many2one('account.analytic.account', 'Analytic Account', readonly=True)
-    team_id = fields.Many2one('crm.team', 'Sales Channel', readonly=True)
+    pricelist_id = fields.Many2one('product.pricelist', 'Lista de precios', readonly=True)
+    country_id = fields.Many2one('res.country', 'País del cliente', readonly=True)
+    price_subtotal = fields.Float(string='Subtotal', readonly=True)
+    product_qty = fields.Float('Cantidad', readonly=True)
+    analytic_account_id = fields.Many2one('account.analytic.account', 'Cuenta analítica', readonly=True)
+    team_id = fields.Many2one('crm.team', 'Canal de ventas', readonly=True)
 
     def _so(self):
         so_str = """
             WITH currency_rate as (%s)
                 SELECT sol.id AS id,
                     so.name AS name,
-                    #'Ventas Corp' AS puntodeventa,
+                    'Ventas Corp' AS puntodeventa,
                     so.partner_id AS partner_id,
                     sol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -66,7 +66,7 @@ class PosSaleReport_EB(models.Model):
                  SELECT
                     (-1) * pol.id AS id,
                     pos.name AS name,
-                    #config.name AS puntodeventa,
+                    config.name AS puntodeventa,
                     pos.partner_id AS partner_id,
                     pol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -103,7 +103,7 @@ class PosSaleReport_EB(models.Model):
             CREATE or REPLACE VIEW %s AS
                 SELECT id AS id,
                     name,
-                    #puntodeventa,
+                    puntodeventa,
                     partner_id,
                     product_id,
                     product_tmpl_id,
