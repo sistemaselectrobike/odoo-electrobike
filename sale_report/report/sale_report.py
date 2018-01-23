@@ -30,7 +30,7 @@ class PosSaleReport_EB(models.Model):
             WITH currency_rate as (%s)
                 SELECT sol.id AS id,
                     so.name AS name,
-                    'Ventas directas' AS 'puntodeventa',
+                    'Ventas directas' AS puntodeventa,
                     so.partner_id AS partner_id,
                     sol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -66,7 +66,7 @@ class PosSaleReport_EB(models.Model):
                  SELECT
                     (-1) * pol.id AS id,
                     pos.name AS name,
-                    pco.name AS 'puntodeventa',
+                    pco.name AS puntodeventa,
                     pos.partner_id AS partner_id,
                     pol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
