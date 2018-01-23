@@ -9,6 +9,7 @@ class PosSaleReport_EB(models.Model):
     _auto = False
 
     name = fields.Char('Order Reference', readonly=True)
+    puntodeventa = fields.Char('Punto de venta', readonly=True)
     partner_id = fields.Many2one('res.partner', 'Partner', readonly=True)
     product_id = fields.Many2one('product.product', string='Product', readonly=True)
     product_tmpl_id = fields.Many2one('product.template', 'Product Template', readonly=True)
@@ -29,6 +30,7 @@ class PosSaleReport_EB(models.Model):
             WITH currency_rate as (%s)
                 SELECT sol.id AS id,
                     so.name AS name,
+                    'Ventas directas' AS 'puntodeventa',
                     so.partner_id AS partner_id,
                     sol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -64,6 +66,7 @@ class PosSaleReport_EB(models.Model):
                  SELECT
                     (-1) * pol.id AS id,
                     pos.name AS name,
+                    pco.name AS 'puntodeventa',
                     pos.partner_id AS partner_id,
                     pol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -89,6 +92,8 @@ class PosSaleReport_EB(models.Model):
                     LEFT JOIN res_company AS rc ON (pos.company_id = rc.id)
                     LEFT JOIN res_partner rp ON (rc.partner_id = rp.id)
                     LEFT JOIN product_uom u ON (u.id=pt.uom_id)
+                    LEFT JOIN pos_session ps ON (pos.session_id = ps.id)
+                    LEFT JOIN pos_config pco ON (ps.config_id = pco.id)
          """
         return pos_str
 
@@ -100,6 +105,7 @@ class PosSaleReport_EB(models.Model):
             CREATE or REPLACE VIEW %s AS
                 SELECT id AS id,
                     name,
+                    puntodeventa,
                     partner_id,
                     product_id,
                     product_tmpl_id,
