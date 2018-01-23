@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
      <record id="report_all_channels_sales_eb_view_pivot" model="ir.ui.view">
-         <field name="name">report.all.channels.sales.pivot</field>
+         <field name="name">report.all.channels.sales.eb.pivot</field>
          <field name="model">report.all.channels.sales.eb</field>
          <field name="arch" type="xml">
             <pivot string="All Channels Sales Orders Analysis">
