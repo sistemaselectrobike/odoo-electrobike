@@ -9,7 +9,7 @@ class PosSaleReport_EB(models.Model):
     _auto = False
 
     name = fields.Char('Orden de venta', readonly=True)
-    puntodeventa = fields.Char('Punto de venta', readonly=True)
+    punto = fields.Char('Punto de venta', readonly=True)
     partner_id = fields.Many2one('res.partner', 'Cliente', readonly=True)
     product_id = fields.Many2one('product.product', string='Producto', readonly=True)
     product_tmpl_id = fields.Many2one('product.template', 'Producto (Template)', readonly=True)
@@ -30,7 +30,7 @@ class PosSaleReport_EB(models.Model):
             WITH currency_rate as (%s)
                 SELECT sol.id AS id,
                     so.name AS name,
-                    NULL AS puntodeventa,
+                    NULL AS punto,
                     so.partner_id AS partner_id,
                     sol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -66,7 +66,7 @@ class PosSaleReport_EB(models.Model):
                  SELECT
                     (-1) * pol.id AS id,
                     pos.name AS name,
-                    config.name AS puntodeventa,
+                    config.name AS punto,
                     pos.partner_id AS partner_id,
                     pol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -103,7 +103,7 @@ class PosSaleReport_EB(models.Model):
             CREATE or REPLACE VIEW %s AS
                 SELECT id AS id,
                     name,
-                    puntodeventa,
+                    punto,
                     partner_id,
                     product_id,
                     product_tmpl_id,
