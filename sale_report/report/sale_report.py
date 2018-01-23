@@ -3,9 +3,8 @@
 
 from odoo import api, fields, models, tools
 
-
 class PosSaleReport_EB(models.Model):
-    _name = "report.all.channels.sales.EB"
+    _name = "report.all.channels.sales.eb"
     _description = "All sales orders grouped by sales channels"
     _auto = False
 

@@ -2,7 +2,7 @@
 <odoo>
      <record id="report_all_channels_sales_eb_view_pivot" model="ir.ui.view">
          <field name="name">report.all.channels.sales.pivot</field>
-         <field name="model">report.all.channels.sales.EB</field>
+         <field name="model">report.all.channels.sales.eb</field>
          <field name="arch" type="xml">
             <pivot string="All Channels Sales Orders Analysis">
                 <field name="name" type="row"/>
@@ -13,7 +13,7 @@
 
     <record id="report_all_channels_sales_eb_view_search" model="ir.ui.view">
         <field name="name">report.all.channels.sales.eb.search</field>
-        <field name="model">report.all.channels.sales.EB</field>
+        <field name="model">report.all.channels.sales.eb</field>
         <field name="arch" type="xml">
             <search string="All Channels Sales Orders Analysis">
                 <field name="date_order"/>
@@ -27,7 +27,7 @@
 
     <record id="report_all_channels_sales_eb_action" model="ir.actions.act_window">
         <field name="name">All Channels Sales Orders</field>
-        <field name="res_model">report.all.channels.sales.EB</field>
+        <field name="res_model">report.all.channels.sales.eb</field>
         <field name="view_mode">pivot</field>
         <field name="view_id" ref="report_all_channels_sales_eb_view_pivot"/>
         <field name="search_view_id" ref="report_all_channels_sales_eb_view_search"/>
