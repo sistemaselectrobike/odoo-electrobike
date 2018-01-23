@@ -25,7 +25,7 @@ class PosSaleReport_EB(models.Model):
     analytic_account_id = fields.Many2one('account.analytic.account', 'Analytic Account', readonly=True)
     team_id = fields.Many2one('crm.team', 'Sales Channel', readonly=True)
 
-    def _so(self): ''' - Ventas - '''
+    def _so(self):
         so_str = """
             WITH currency_rate as (%s)
                 SELECT sol.id AS id,
@@ -60,7 +60,7 @@ class PosSaleReport_EB(models.Model):
         """ % self.env['res.currency']._select_companies_rates()
         return so_str
 
-    def _pos(self): ''' - Punto de venta - '''
+    def _pos(self):
         pos_str = """
                  SELECT
                     (-1) * pol.id AS id,
