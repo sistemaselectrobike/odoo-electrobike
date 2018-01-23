@@ -66,7 +66,7 @@ class PosSaleReport_EB(models.Model):
                  SELECT
                     (-1) * pol.id AS id,
                     pos.name AS name,
-                    pco.name AS puntodeventa,
+                    config.name AS puntodeventa,
                     pos.partner_id AS partner_id,
                     pol.product_id AS product_id,
                     pro.product_tmpl_id AS product_tmpl_id,
@@ -92,8 +92,6 @@ class PosSaleReport_EB(models.Model):
                     LEFT JOIN res_company AS rc ON (pos.company_id = rc.id)
                     LEFT JOIN res_partner rp ON (rc.partner_id = rp.id)
                     LEFT JOIN product_uom u ON (u.id=pt.uom_id)
-                    LEFT JOIN pos_session ps ON (pos.session_id = ps.id)
-                    LEFT JOIN pos_config pco ON (ps.config_id = pco.id)
          """
         return pos_str
 
