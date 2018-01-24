@@ -77,7 +77,7 @@ class PosSaleReport_EB(models.Model):
                     1.16 AS price_total,
                     pos.pricelist_id AS pricelist_id,
                     rp.country_id AS country_id,
-                    pol.price_subtotal AS price_subtotal,
+                    1.00 AS price_subtotal,
                     (pol.qty * u.factor) AS product_qty,
                     NULL AS analytic_account_id,
                     config.crm_team_id AS team_id
