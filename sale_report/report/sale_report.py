@@ -74,7 +74,7 @@ class PosSaleReport_EB(models.Model):
                     pos.user_id AS user_id,
                     pt.categ_id AS categ_id,
                     pos.company_id AS company_id,
-                    pol.price_subtotal_incl AS price_total,
+                    1.16 AS price_total,
                     pos.pricelist_id AS pricelist_id,
                     rp.country_id AS country_id,
                     pol.price_subtotal AS price_subtotal,
