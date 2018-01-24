@@ -17,13 +17,13 @@ class PosSaleReport_EB(models.Model):
     user_id = fields.Many2one('res.users', 'Vendedor', readonly=True)
     categ_id = fields.Many2one('product.category', 'Categoría de producto', readonly=True)
     company_id = fields.Many2one('res.company', 'Companía', readonly=True)
-    price_total = fields.Float('Total', readonly=True)
     pricelist_id = fields.Many2one('product.pricelist', 'Lista de precios', readonly=True)
     country_id = fields.Many2one('res.country', 'País del cliente', readonly=True)
-    price_subtotal = fields.Float(string='Subtotal', readonly=True)
-    product_qty = fields.Float('Cantidad', readonly=True)
     analytic_account_id = fields.Many2one('account.analytic.account', 'Cuenta analítica', readonly=True)
     team_id = fields.Many2one('crm.team', 'Canal de ventas', readonly=True)
+    product_qty = fields.Float('Cantidad', readonly=True)
+    price_subtotal = fields.Float(string='Subtotal sin IVA', readonly=True)
+    price_total = fields.Float('Total con IVA', readonly=True)
 
     def _so(self):
         so_str = """
@@ -74,10 +74,10 @@ class PosSaleReport_EB(models.Model):
                     pos.user_id AS user_id,
                     pt.categ_id AS categ_id,
                     pos.company_id AS company_id,
-                    ((pol.qty * pol.price_unit) * (100 - pol.discount) / 100) AS price_total,
+                    pol.price_subtotal_incl AS price_total,
                     pos.pricelist_id AS pricelist_id,
                     rp.country_id AS country_id,
-                    (pol.qty * pol.price_unit) AS price_subtotal,
+                    pol.price_subtotal AS price_subtotal,
                     (pol.qty * u.factor) AS product_qty,
                     NULL AS analytic_account_id,
                     config.crm_team_id AS team_id
