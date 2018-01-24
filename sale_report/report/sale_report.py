@@ -74,10 +74,10 @@ class PosSaleReport_EB(models.Model):
                     pos.user_id AS user_id,
                     pt.categ_id AS categ_id,
                     pos.company_id AS company_id,
-                    ((pol.qty * pol.price_unit) * (100 - pol.discount) / 100) AS price_total,
+                    ((pol.qty * pol.price_unit) * (100 - pol.discount) / 100)*1.16 AS price_total,
                     pos.pricelist_id AS pricelist_id,
                     rp.country_id AS country_id,
-                    ((pol.qty * pol.price_unit) * (100 - pol.discount) / 100)*1.16 AS price_total,
+                    ((pol.qty * pol.price_unit) * (100 - pol.discount) / 100) AS price_subtotal,
                     (pol.qty * u.factor) AS product_qty,
                     NULL AS analytic_account_id,
                     config.crm_team_id AS team_id
