@@ -47,6 +47,8 @@ class SaleOrderLine(models.Model):
         if res.get('warning'):
             product = self.product_id.with_context(warehouse=self.order_id.warehouse_id.id)
             self.product_uom_qty = product.virtual_available
+        if self.product_uom_qty < 0:
+            self.product_uom_qty = 0
         return res
 
     @api.onchange('product_id')
